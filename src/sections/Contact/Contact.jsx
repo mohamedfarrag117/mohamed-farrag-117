@@ -2,7 +2,8 @@ import { useState } from "react";
 import styles from "./ContactStyles.module.css";
 import emailjs from "emailjs-com";
 import ReCAPTCHA from "react-google-recaptcha";
-
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -54,11 +55,29 @@ const Contact = () => {
     }
   };
 
+  const { ref, inView } = useInView({
+    threshold: 0.01,
+    triggerOnce: true,
+  });
+
   return (
-    <section id="contact" className={styles.container}>
+    <motion.section
+      id="contact"
+      className={styles.container}
+      ref={ref}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: inView ? 100 : 0 }}
+      transition={{ duration: 2.5 }}
+    >
       <h1 className="sectionTitle">Contact</h1>
       <form onSubmit={handleSubmit}>
-        <div className="formGroup">
+        <motion.div
+          className="formGroup"
+          ref={ref}
+          initial={{ x: 200, opacity: 0 }}
+          animate={{ x: inView ? 0 : 200, opacity: 100 }}
+          transition={{ duration: 2.5 }}
+        >
           <label htmlFor="name" hidden>
             Name
           </label>
@@ -71,8 +90,14 @@ const Contact = () => {
             onChange={handleChange}
             value={formData.name}
           />
-        </div>
-        <div className="formGroup">
+        </motion.div>
+        <motion.div
+          className="formGroup"
+          ref={ref}
+          initial={{ x: -200, opacity: 0 }}
+          animate={{ x: inView ? 0 : -200, opacity: 100 }}
+          transition={{ duration: 2.5 }}
+        >
           <label htmlFor="email" hidden>
             Email
           </label>
@@ -85,8 +110,14 @@ const Contact = () => {
             onChange={handleChange}
             value={formData.email}
           />
-        </div>
-        <div className="formGroup">
+        </motion.div>
+        <motion.div
+          className="formGroup"
+          ref={ref}
+          initial={{ x: 200, opacity: 0 }}
+          animate={{ x: inView ? 0 : 200, opacity: 100 }}
+          transition={{ duration: 2.5 }}
+        >
           <label htmlFor="message" hidden>
             Message
           </label>
@@ -98,17 +129,17 @@ const Contact = () => {
             onChange={handleChange}
             value={formData.message}
           ></textarea>
-        </div>
+        </motion.div>
         <div className={styles.recaptcha}>
           <ReCAPTCHA
-            sitekey="6Le7ghkqAAAAACMlPd4nG3GHtdRSicwewTix_Lgv" // Replace with your reCAPTCHA site key
+            sitekey="6LdtlicqAAAAANmXd8J5MaQNk2F1uiGRJTDzCX6k" // Replace with your reCAPTCHA site key
             onChange={handleRecaptchaChange}
           />
         </div>
         <input className="hover btn" type="submit" value="Submit" />
       </form>
       {status && <p>{status}</p>}
-    </section>
+    </motion.section>
   );
 };
 

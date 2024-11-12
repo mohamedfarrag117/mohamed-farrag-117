@@ -8,12 +8,30 @@ import Ecommerce from "../../assets/Ecommerce.png";
 import Calc from "../../assets/Calc.png";
 import RandomQuoteMachine from "../../assets/RandomQuoteMachine.png";
 import ProjectCard from "../../common/ProjectCard";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 function Projects() {
+  const { ref, inView } = useInView({
+    threshold: 0.01,
+    triggerOnce: true,
+  });
   return (
-    <section id="projects" className={styles.container}>
+    <motion.section
+      id="projects"
+      className={styles.container}
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 100, x: inView ? 0 : 100 }}
+      transition={{ duration: 2.5 }}
+      ref={ref}
+    >
       <h1 className="sectionTitle">Projects</h1>
       <div className={styles.projectsContainer}>
+        <ProjectCard
+          src={Ecommerce}
+          link={"https://mohamedfarrag117.github.io/e-commerce/"}
+          h3="E-Commerce"
+        />
         <ProjectCard
           src={yugiapp2}
           link={"https://mohamedfarrag117.github.io/Yu-Gi-Oh-Database/"}
@@ -29,26 +47,22 @@ function Projects() {
           link={"https://mohamedfarrag117.github.io/Corporate/"}
           h3="Corporate"
         />
-        <ProjectCard
-          src={MusicPlayer}
-          link={"https://mohamedfarrag117.github.io/Music-Player/"}
-          h3="Music Player"
-        />
+
         <ProjectCard
           src={RandomQuoteMachine}
           link={"https://mohamedfarrag117.github.io/randomquotemachine/"}
           h3="Random quote machine"
         />
+
         <ProjectCard
           src={GithubFinder}
           link={"https://mohamedfarrag117.github.io/Github-Finder/"}
           h3="Github Finder"
         />
-
         <ProjectCard
-          src={Ecommerce}
-          link={"https://mohamedfarrag117.github.io/e-commerce/"}
-          h3="E-Commerce"
+          src={MusicPlayer}
+          link={"https://mohamedfarrag117.github.io/Music-Player/"}
+          h3="Music Player"
         />
         <ProjectCard
           src={Calc}
@@ -56,7 +70,7 @@ function Projects() {
           h3="Calculator"
         />
       </div>
-    </section>
+    </motion.section>
   );
 }
 

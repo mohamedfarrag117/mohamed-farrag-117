@@ -1,6 +1,5 @@
 import styles from "./HeroStyles.module.css";
-import heroImg from "../../assets/hero-img.png";
-import hero2 from "../../assets/Hero2.png";
+import mypic from "../../assets/mypic.png";
 import sun from "../../assets/sun.svg";
 import moon from "../../assets/moon.svg";
 import twitterLight from "../../assets/twitter-light.svg";
@@ -9,8 +8,9 @@ import githubLight from "../../assets/github-light.svg";
 import githubDark from "../../assets/github-dark.svg";
 import linkedinLight from "../../assets/linkedin-light.svg";
 import linkedinDark from "../../assets/linkedin-dark.svg";
-import CV from "../../assets/cv.pdf";
+import LatestCV from "../../assets/LatestCV.pdf";
 import { useTheme } from "../../common/ThemeContext";
+import { motion } from "framer-motion";
 
 function Hero() {
   const { theme, toggleTheme } = useTheme();
@@ -21,9 +21,15 @@ function Hero() {
   const linkedinIcon = theme === "light" ? linkedinLight : linkedinDark;
 
   return (
-    <section id="hero" className={styles.container}>
+    <motion.section
+      id="hero"
+      className={styles.container}
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 100 }}
+      transition={{ duration: 2.5, stiffness: 120, type: "spring" }}
+    >
       <div className={styles.colorModeContainer}>
-        <img className={styles.hero} src={hero2} alt="Profile picture" />
+        <img className={styles.hero} src={mypic} alt="Profile picture" />
         <img
           className={styles.colorMode}
           src={themeIcon}
@@ -39,15 +45,18 @@ function Hero() {
         </h1>
         <h2>Frontend Developer</h2>
         <span>
-          <a href="http://twitter.com/" target="_blank">
+          <a href="https://x.com/Mohamed07839446" target="_blank">
             <img src={twitterIcon} alt="Twitter icon" />
           </a>
 
-          <a href="http://github.com/" target="_blank">
+          <a href="https://github.com/mohamedfarrag117" target="_blank">
             <img src={githubIcon} alt="Github icon" />
           </a>
 
-          <a href="http://linkedin.com/" target="_blank">
+          <a
+            href="https://www.linkedin.com/in/mohamed-farrag-570195233/"
+            target="_blank"
+          >
             <img src={linkedinIcon} alt="Linkedin icon" />
           </a>
         </span>
@@ -55,11 +64,11 @@ function Hero() {
           With a passion for developing modern React web apps for commercial
           businesses
         </p>
-        <a href={CV} download>
+        <a className={styles.download} href={LatestCV} download>
           <button className="hover">Resume</button>
         </a>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

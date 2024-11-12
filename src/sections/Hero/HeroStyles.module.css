@@ -9,7 +9,7 @@
 
   .hero {
     width: 24rem;
-    height: 26rem;
+    height: 13rem;
     max-width: 200px;
     /* max-height: 150px; */
     border-radius: 50%;
@@ -82,6 +82,20 @@
   gap: 20px;
 }
 
+@media (width >= 300px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 3.5rem;
+    .hero {
+      max-width: 350px;
+      width: 200px;
+      height: 12rem;
+    }
+  }
+}
+
 @media (width >= 800px) {
   .container {
     flex-direction: row-reverse;
@@ -90,7 +104,8 @@
 
     .hero {
       max-width: 350px;
-      width: 350px;
+      width: 200px;
+      height: 12rem;
     }
   }
 }
@@ -98,7 +113,8 @@
   .container {
     .hero {
       max-width: 400px;
-      width: 400px;
+      width: 225px;
+      height: 13rem;
     }
   }
 }
